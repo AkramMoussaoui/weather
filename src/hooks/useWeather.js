@@ -1,25 +1,25 @@
 import { useState, useEffect } from "react";
 
-const useWeather = (action) => {
+const useWeather = (action, click) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
-  const loadData = async () => {
-    try {
-      setLoading(true);
-      const actionData = await action();
-      setData(actionData);
-    } catch (e) {
-      setError(e);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const actionData = await action();
+        console.log(actionData.data);
+        setData(actionData.data);
+      } catch (e) {
+        setError(e);
+      } finally {
+        setLoading(false);
+      }
+    };
     loadData();
-  }, [action]);
+  }, [click]);
 
   return [data, loading, error];
 };
