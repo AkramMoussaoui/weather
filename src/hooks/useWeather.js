@@ -10,7 +10,6 @@ const useWeather = (action, click) => {
       try {
         setLoading(true);
         const actionData = await action();
-        console.log(actionData.data);
         setData(actionData.data);
       } catch (e) {
         setError(e);
